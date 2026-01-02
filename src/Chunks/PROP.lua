@@ -240,7 +240,7 @@ local function PROP(chunk: Types.Chunk, rbxm: Types.Rbxm)
 
 	elseif typeID == 0x12 then
 		-- Enum
-		properties = BasicTypes.unsignedIntArray(reader, sizeof)
+		properties = BasicTypes.unsignedIntArray(reader, sizeof,">")
 
 	elseif typeID == 0x13 then
 		-- Ref
@@ -354,7 +354,7 @@ local function PROP(chunk: Types.Chunk, rbxm: Types.Rbxm)
 
 	elseif typeID == 0x1C then
 		-- SharedString
-		local strings = BasicTypes.unsignedIntArray(reader, sizeof)
+		local strings = BasicTypes.unsignedIntArray(reader, sizeof,">")
 		for i = 1, sizeof do
 			local ref = strings[i] + 1
 			properties[i] = rbxm.Strings[ref]

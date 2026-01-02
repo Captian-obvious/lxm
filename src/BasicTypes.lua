@@ -55,13 +55,13 @@ function basicTypes.InterleaveArrayWithSize(buffer: Types.Buffer, count: number,
 	return Buffer(table.concat(out), false)
 end
 
-function basicTypes.unsignedIntArray(buffer: Types.Buffer, count: number): {number}
+function basicTypes.unsignedIntArray(buffer: Types.Buffer, count: number,endianness:string): {number}
 	if count < 1 then return {} end
 
 	local o = table.create(count)
 	local strings = basicTypes.InterleaveArrayWithSize(buffer, count, 4)
 	for i = 1, count do
-		o[i] = strings:readNumber("<I4")
+		o[i] = strings:readNumber(endianness.."I4")
 	end
 
 	return o
